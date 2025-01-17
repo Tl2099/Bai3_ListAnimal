@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bai3_ListAnimal</string>
+    <string name="bt_Add">Add Animal</string>
+    <string name="animal_name">Animal Name</string>
+    <string name="Animal_species">Species</string>
+    <string name="bt_edit">Edit</string>
+    <string name="bt_delete">Delete</string>
+</resources>

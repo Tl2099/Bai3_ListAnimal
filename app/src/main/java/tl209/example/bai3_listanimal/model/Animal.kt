@@ -1,9 +1,11 @@
 package tl209.example.bai3_listanimal.model
 
-data class Animal(
-    val id: Int,
+open class Animal(
     var species: String,
     var name: String,
-    var furColor: String,
-    var icon: Int
-)
+    var furColor: String
+){
+    open fun getIcon(): Int{
+        return 0
+    }
+}

@@ -1,0 +1,7 @@
+<resources>
+    <!-- Định dạng cho hình ảnh bo tròn góc -->
+    <style name="CircularImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- Đây là tỷ lệ bo tròn -->
+    </style>
+</resources>

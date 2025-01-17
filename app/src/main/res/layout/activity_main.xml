@@ -5,19 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
+
+    <EditText
+        android:id="@+id/etName"
+        android:hint="Enter animal name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etColor"
+        android:hint="Enter animal color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Spinner
+        android:id="@+id/spSpecies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/btAdd"
-        android:layout_width="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bt_Add" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListAnimal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

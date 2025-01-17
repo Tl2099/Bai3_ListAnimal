@@ -5,59 +5,46 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import tl209.example.bai3_listanimal.adapter.AnimalAdapter
 import tl209.example.bai3_listanimal.databinding.ActivityMainBinding
 import tl209.example.bai3_listanimal.model.Animal
-import tl209.example.bai3_listanimal.viewmodel.AnimalViewModel
 import android.graphics.Color
+import android.view.View
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.Toast
 import yuku.ambilwarna.AmbilWarnaDialog
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private val viewModel: AnimalViewModel by viewModels()
 
-    @SuppressLint("NotifyDataSetChanged")
+    private lateinit var colorPreviewContainer: View
+    private lateinit var selectColorButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.test4)
 
-        val adapter = AnimalAdapter(
-            animals = viewModel.animals.value ?: emptyList(),
-            onEdit = { animal -> showColorPickerDialog(animal) },
-            onDelete = {animal -> viewModel.deleteAnimal(animal)}
-        )
+        colorPreviewContainer = findViewById(R.id.colorPreviewContainer)
+        selectColorButton = findViewById(R.id.selectColorButton)
 
-        binding.rvListAnimal.layoutManager = LinearLayoutManager(this)
-        binding.rvListAnimal.adapter = adapter
+        colorPreviewContainer.setOnClickListener {
+            // Mở hộp thoại chọn màu AmbilWarnaDialog
+            val colorPickerDialog = AmbilWarnaDialog(
+                this,
+                android.graphics.Color.BLACK, // Màu mặc định
+                object : OnAmbilWarnaListener {
+                    override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
+                        colorPreviewContainer.setBackgroundColor(color)
+                        Toast.makeText(this@MainActivity, "Đã chọn màu", Toast.LENGTH_SHORT).show()
 
-        viewModel.animals.observe(this){
-            adapter.notifyDataSetChanged()
+                    }
+                    override fun onCancel(dialog: AmbilWarnaDialog?) {
+                        Toast.makeText(this@MainActivity, "Đã hủy chọn màu", Toast.LENGTH_SHORT).show()
+
+                    }
+                })
+            colorPickerDialog.show()
         }
-
-        binding.btAdd.setOnClickListener{
-            viewModel.addSampleAnimal()
-        }
-
-    }
-
-    //Ham hien thi Dialog chon mau
-    private fun showColorPickerDialog(animal: Animal) {
-        // Tạo một đối tượng AmbilWarnaDialog với màu mặc định từ animal.furColor
-        val colorPickerDialog = AmbilWarnaDialog(this, Color.parseColor(animal.furColor), object : OnAmbilWarnaListener {
-            override fun onCancel(dialog: AmbilWarnaDialog?) {
-
-            }
-
-            override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
-
-
-            }
-        }
-        )
-
-        // Cấu hình các tùy chọn
-        colorPickerDialog.show()
     }
 }
